@@ -18,14 +18,16 @@ public class ServiceTicket {
      * @param listOfTicket - список объектов Ticket
      * @return список интервалов времени полетов в секундах
      */
-    public static List<Long> listFlightTime (List<Ticket> listOfTicket) {
+    public static List<Long> listFlightTime (List<Ticket> listOfTicket, String origin, String destination) {
         List<Long> differentTimeFlight = new ArrayList<>();
         for (Ticket ticket : listOfTicket) {
-            String startDate = ticket.getDeparture_date();
-            String startTime = ticket.getDeparture_time();
-            String finishDate = ticket.getArrival_date();
-            String finishTime = ticket.getArrival_time();
-            differentTimeFlight.add(differentTimeDate(startDate, startTime, finishDate, finishTime));
+            if (ticket.getOrigin().equals(origin) && ticket.getDestination().equals(destination)) {
+                String startDate = ticket.getDeparture_date();
+                String startTime = ticket.getDeparture_time();
+                String finishDate = ticket.getArrival_date();
+                String finishTime = ticket.getArrival_time();
+                differentTimeFlight.add(differentTimeDate(startDate, startTime, finishDate, finishTime));
+            }
         }
         return differentTimeFlight;
     }
